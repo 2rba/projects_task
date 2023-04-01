@@ -1,24 +1,33 @@
-# README
+Demo available at https://project_task.2rba.com/
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to run
+- Make sure mysql is running
+- Pull the code
+- Install packages `bundle install`
+- Setup database `bundle exec rails db:setup`
+- Run webserver `bundle exec rails s`
+- For tailwind styles run `bin/rails tailwindcss:watch`
 
-Things you may want to cover:
+For tests run `bundle exec rspec`
 
-* Ruby version
+For rubocop run `bundle exec rubocop`
 
-* System dependencies
+## Project questions
 
-* Configuration
+- Q: Do we need users for this demo
+- A: No, please exclude users from the implementation
 
-* Database creation
+- Q: How should UI looks like?
+- A: It should be projects index/new/edit/show pages. Show page should display comments ans status changes. And also add new comment form.
 
-* Database initialization
+- Q: What are expected statuses for a project?
+- A: It should be: new, in progress, done
 
-* How to run the test suite
+## Design decisions
+- Comments and status changes potentially could be a separate tables, implemented in one table to simplify implementation
 
-* Services (job queues, cache servers, search engines, etc.)
+## What is not done
+- Users
+- User interface is rough and requires polishing
+- Would be good to include feature tests
 
-* Deployment instructions
-
-* ...

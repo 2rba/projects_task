@@ -1,0 +1,39 @@
+<div class="mx-auto md:w-2/3 w-full flex">
+  <div class="mx-auto">
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
+
+    <%= render @project %>
+
+    <%= link_to 'Edit this project', edit_project_path(@project), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Back to projects', projects_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+    <h4>Changes</h4>
+    <ul>
+      <% @project.project_changes.each do |project_change| %>
+        <% if project_change.comment.present? %>
+          <li>
+            <%= project_change.comment %>
+          </li>
+        <% else %>
+        <li>
+          <%= project_change.old_status %> -> <%= project_change.new_status %>
+        </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+
+    <%= form_with(model: ProjectChange.new(project: @project), class: "contents") do |form| %>
+      <%= form.hidden_field :project_id, value: @project.id %>
+      <div class="my-5">
+        <%= form.label :comment %>
+        <%= form.text_field :comment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+      <div class="inline">
+        <%= form.submit 'Comment', class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+</div>
