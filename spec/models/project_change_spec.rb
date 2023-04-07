@@ -13,22 +13,36 @@ RSpec.describe ProjectChange do
   end
 
   it 'is valid with old_status and new_status' do
-    expect(described_class.new(project: project, old_status: 'new', new_status: 'in progress')).to be_valid
+    expect(
+      described_class.new(project: project, old_status: 'new',
+                          new_status: 'in progress')
+    ).to be_valid
   end
 
   it 'is invalid without old_status' do
-    expect(described_class.new(project: project, old_status: '', new_status: 'in progress')).to be_invalid
+    expect(
+      described_class.new(project: project, old_status: '',
+                          new_status: 'in progress')
+    ).to be_invalid
   end
 
   it 'is invalid without new_status' do
-    expect(described_class.new(project: project, old_status: 'new', new_status: '')).to be_invalid
+    expect(
+      described_class.new(project: project, old_status: 'new', new_status: '')
+    ).to be_invalid
   end
 
   it 'is invalid with wrong old_status' do
-    expect(described_class.new(project: project, old_status: 'err', new_status: 'in progress')).to be_invalid
+    expect(
+      described_class.new(project: project, old_status: 'err',
+                          new_status: 'in progress')
+    ).to be_invalid
   end
 
   it 'is invalid with wrong new_status' do
-    expect(described_class.new(project: project, old_status: 'new', new_status: 'err')).to be_invalid
+    expect(
+      described_class.new(project: project, old_status: 'new',
+                          new_status: 'err')
+    ).to be_invalid
   end
 end

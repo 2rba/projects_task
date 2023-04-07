@@ -15,7 +15,12 @@ class Project < ApplicationRecord
 
   def update_status!(new_status)
     transaction do
-      project_changes.create!(old_status: status, new_status: new_status) if status != new_status
+      if status != new_status
+        project_changes.create!(
+          old_status: status,
+          new_status: new_status
+        )
+      end
       update!(status: new_status)
     end
   end

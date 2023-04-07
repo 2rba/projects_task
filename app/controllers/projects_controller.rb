@@ -3,7 +3,10 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update]
 
   def index
-    @projects = Project.all.order(created_at: :desc).strict_loading.includes(:project_changes)
+    @projects = Project.all
+      .order(created_at: :desc)
+      .strict_loading
+      .includes(:project_changes)
   end
 
   def show; end

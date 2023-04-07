@@ -14,6 +14,8 @@ class ProjectChangesController < ApplicationController
 
   def project_params
     project_change_params = params.require(:project_change)
-    project_change_params.permit(:comment, :status).merge(project_id: project_change_params.require(:project_id))
+    project_change_params
+      .permit(:comment, :status)
+      .merge(project_id: project_change_params.require(:project_id))
   end
 end

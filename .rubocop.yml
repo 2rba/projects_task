@@ -15,9 +15,7 @@ AllCops:
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
 Layout/LineLength:
-  Max: 140
-  Exclude:
-    - 'app/models/near_indexer/action_receipt_action.rb'
+  Max: 80
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Style/Documentation:
@@ -36,8 +34,6 @@ Lint/EmptyBlock:
   Enabled: false
 Metrics/ClassLength:
   Max: 600
-  Exclude:
-    - 'apps/near/app/services/near.rb'
 Metrics/ModuleLength:
   Max: 400
 Metrics/MethodLength:

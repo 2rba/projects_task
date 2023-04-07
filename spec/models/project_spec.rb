@@ -23,14 +23,18 @@ RSpec.describe Project do
     end
 
     it 'creates project_change' do
-      expect { project.update_status!('in progress') }.to change { project.project_changes.count }.by(1)
+      expect do
+        project.update_status!('in progress')
+      end.to change { project.project_changes.count }.by(1)
       expect(project.project_changes.last.old_status).to eq('new')
       expect(project.project_changes.last.new_status).to eq('in progress')
     end
 
     context 'with invalid status' do
       it 'does not update project status' do
-        expect { project.update_status!('err') }.to raise_error(ActiveRecord::RecordInvalid)
+        expect do
+          project.update_status!('err')
+        end.to raise_error(ActiveRecord::RecordInvalid)
           .and(not_change { project.status })
           .and(not_change { ProjectChange.count })
       end

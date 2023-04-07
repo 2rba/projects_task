@@ -70,7 +70,7 @@ RSpec.describe '/projects' do
         end.not_to change(Project, :count)
       end
 
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
+      it 'renders a response with 422 status' do
         post projects_url, params: { project: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -86,7 +86,9 @@ RSpec.describe '/projects' do
       it 'updates the requested project' do
         expect do
           patch project_url(project), params: { project: new_attributes }
-        end.to change { project.reload.status }.from(Project::NEW).to(Project::IN_PROGRESS)
+        end.to change {
+                 project.reload.status
+               }.from(Project::NEW).to(Project::IN_PROGRESS)
       end
 
       it 'logs the change' do
@@ -94,7 +96,9 @@ RSpec.describe '/projects' do
           patch project_url(project), params: { project: new_attributes }
         end.to change(ProjectChange, :count).by(1)
         expect(project.project_changes.last.old_status).to eq(Project::NEW)
-        expect(project.project_changes.last.new_status).to eq(Project::IN_PROGRESS)
+        expect(
+          project.project_changes.last.new_status
+        ).to eq(Project::IN_PROGRESS)
       end
 
       it 'redirects to the project' do
@@ -104,7 +108,7 @@ RSpec.describe '/projects' do
     end
 
     context 'with invalid parameters' do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
+      it 'renders a response with 422 status' do
         patch project_url(project), params: { project: { status: 'err' } }
         expect(response).to have_http_status(:unprocessable_entity)
       end
